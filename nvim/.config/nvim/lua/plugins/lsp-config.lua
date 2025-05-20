@@ -23,6 +23,11 @@ return {
 			})
 			lspconfig.pyright.setup({
 				capabilities = capabilities,
+				settings = {
+					python = {
+						pythonPath = vim.fn.exepath("./.venv/bin/python"),
+					},
+				},
 			})
 			lspconfig.ruff.setup({
 				capabilities = capabilities,
