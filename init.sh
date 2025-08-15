@@ -48,7 +48,7 @@ if [ -d "$HOME/Downloads/JetBrainsMono" ]; then
   rm -r $HOME/Downloads/JetBrainsMono
 fi
 mkdir -p $HOME/Downloads/JetBrainsMono
-curl -sOL https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.tar.xz --output-dir $HOME/Downloads/JetBrainsMono
+curl -sLO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.tar.xz --output-dir $HOME/Downloads/JetBrainsMono
 tar xf $HOME/Downloads/JetBrainsMono/JetBrainsMono.tar.xz -C $HOME/Downloads/JetBrainsMono
 rm $HOME/Downloads/JetBrainsMono/JetBrainsMono.tar.xz
 mkdir -p $HOME/.local/share/fonts
@@ -65,13 +65,28 @@ curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 nvm install 22
 echo
 
-# Tmux plugin manager
+# Installing tmux plugin manager
 echo "<<<<<<< INSTALLING TPM >>>>>>>"
 if [ -d "$HOME/.tmux/plugins/tpm" ]; then
   echo "Repository '$HOME/.tmux/plugins/tpm' already exists. Skipping clone."
 else
   git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
   echo "TPM installed!"
+fi
+echo
+
+# Installing neovim
+echo "<<<<<<< INSTALLING NEOVIM >>>>>>>"
+curl -sLO https://github.com/neovim/neovim/releases/latest/download/nvim-linux-x86_64.tar.gz
+sudo rm -rf /opt/nvim
+sudo tar -C /opt -xzf nvim-linux-x86_64.tar.gz
+rm nvim-linux-x86_64.tar.gz
+if ! grep -q 'nvim' $HOME/.bashrc; then
+  cat << 'EOF' >> $HOME/.bashrc
+
+# Adding neovim location to PATH
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
+EOF
 fi
 echo
 
