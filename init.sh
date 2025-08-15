@@ -30,6 +30,7 @@ echo
 
 # Installing packages
 echo "<<<<<<< INSTALLING PACKAGES >>>>>>>"
+cd $HOME/dotfiles
 if [ ! -f "packages.conf" ]; then
   echo "Error: packages.conf not found!"
   exit 1
@@ -48,7 +49,7 @@ if [ -d "$HOME/Downloads/JetBrainsMono" ]; then
 fi
 mkdir -p $HOME/Downloads/JetBrainsMono
 curl -sOL https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/JetBrainsMono.tar.xz --output-dir $HOME/Downloads/JetBrainsMono
-tar xf $HOME/Downloads/JetBrainsMono.tar.xz -C $HOME/Downloads/JetBrainsMono
+tar xf $HOME/Downloads/JetBrainsMono/JetBrainsMono.tar.xz -C $HOME/Downloads/JetBrainsMono
 rm $HOME/Downloads/JetBrainsMono/JetBrainsMono.tar.xz
 mkdir -p $HOME/.local/share/fonts
 mv $HOME/Downloads/JetBrainsMono/* ~/.local/share/fonts
@@ -93,7 +94,7 @@ if ! grep -q 'exec tmux' $HOME/.bashrc; then
   cat << 'EOF' >> $HOME/.bashrc
 
 # Auto-start tmux
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =$HOME screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
   exec tmux
 fi
 EOF
