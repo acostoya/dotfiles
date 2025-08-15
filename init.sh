@@ -20,12 +20,12 @@ EOF
 
 # Updating pakages
 echo "<<<<<<< UPDATING APT PACKAGES >>>>>>>"
-sudo apt update 
+sudo apt-get update 
 echo
 
 # Upgrading pakages
 echo "<<<<<<< UPGRADING APT PACKAGES >>>>>>>"
-sudo apt update 
+sudo apt-get upgrade -y
 echo
 
 # Installing packages
