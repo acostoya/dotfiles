@@ -88,6 +88,7 @@ if ! grep -q 'nvim' $HOME/.bashrc; then
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 EOF
 fi
+echo "Neovim installed!"
 echo
 
 # Stowing dotfiles
@@ -117,6 +118,8 @@ fi
 echo "TMUX auto-start configured!"
 echo
 
-
 echo "<<<<<<< INSTALLING UV BY ASTRAL >>>>>>>"
 curl -LsSf https://astral.sh/uv/install.sh | sh
+echo
+
+echo "<<<<<<< EVERYTHING RUN SUCCESSFULLY >>>>>>>"
