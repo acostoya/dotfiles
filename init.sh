@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -e
+cd $HOME/dotfiles
 
 echo
 cat << "EOF"
@@ -30,7 +31,6 @@ echo
 
 # Installing packages
 echo "<<<<<<< INSTALLING PACKAGES >>>>>>>"
-cd $HOME/dotfiles
 if [ ! -f "packages.conf" ]; then
   echo "Error: packages.conf not found!"
   exit 1
@@ -49,7 +49,7 @@ sudo apt-get install -y "$VENV_PACKAGE"
 echo
 
 echo "INSTALLING PACKAGE: alacritty"
-if apt-cache showpkg alacritty >/dev/null 2>&1; then
+if apt-cache show alacritty >/dev/null 2>&1; then
   sudo apt-get install alacritty -y
   sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/alacritty 50
 else
@@ -91,7 +91,6 @@ echo
 
 # Stowing dotfiles
 echo "<<<<<<< STOWING DOTFILES >>>>>>>"
-cd $HOME/dotfiles
 stow alacritty tmux nvim
 echo "Dotfiles stowed!"
 echo

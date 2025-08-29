@@ -6,10 +6,10 @@ fi
 cd $HOME
 
 # Installing dependencies
-sudo apt install cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+sudo apt install cmake g++ pkg-config libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3 -y
 
 # Installing rustup
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 rustup override set stable
 rustup update stable
 
@@ -30,5 +30,5 @@ scdoc < extra/man/alacritty-msg.1.scd | gzip -c | sudo tee /usr/local/share/man/
 scdoc < extra/man/alacritty.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty.5.gz > /dev/null
 scdoc < extra/man/alacritty-bindings.5.scd | gzip -c | sudo tee /usr/local/share/man/man5/alacritty-bindings.5.gz > /dev/null
 
-cd $HOME
+cd $HOME/dotfiles
 sudo rm -r $HOME/alacritty
