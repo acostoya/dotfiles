@@ -49,7 +49,7 @@ sudo apt-get install -y "$VENV_PACKAGE"
 echo
 
 echo "INSTALLING PACKAGE: alacritty"
-if apt-cache showpkg alacritty | grep -qv "purely virtual"; then
+if apt-cache show alacritty | grep -qv "purely virtual"; then
   sudo apt-get install alacritty -y
   sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/alacritty 50
 else
