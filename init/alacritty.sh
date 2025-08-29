@@ -21,7 +21,7 @@ sudo tic -xe alacritty,alacritty-direct extra/alacritty.info
 sudo cp target/release/alacritty /usr/local/bin
 sudo cp extra/logo/alacritty-term.svg /usr/share/pixmaps/Alacritty.svg
 sudo desktop-file-install extra/linux/Alacritty.desktop
-sudo update-desktop-databasejkk
+sudo update-desktop-database
 
 sudo mkdir -p /usr/local/share/man/man1
 sudo mkdir -p /usr/local/share/man/man5
