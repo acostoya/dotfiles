@@ -28,6 +28,9 @@ VENV_PACKAGE="python${PYTHON_VERSION}-venv"
 echo "Installing ${VENV_PACKAGE}..."
 sudo apt-get install -y "$VENV_PACKAGE" > /dev/null
 
+# Setting up Alacritty as default terminal emulator
+sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/alacritty 50
+
 # Downloading nerd-font
 echo "Installing nerdfont..."
 cd $HOME/dotfiles
