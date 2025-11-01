@@ -2,109 +2,61 @@
 
 set -e
 
-echo
-cat << "EOF"
- _____                                                                               _____ 
-( ___ )                                                                             ( ___ )
- |   |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|   | 
- |   |      ____                    _                  _       _ _         _         |   | 
- |   |     |  _ \ _   _ _ __  _ __ (_)_ __   __ _     (_)_ __ (_) |_   ___| |__      |   | 
- |   |     | |_) | | | | '_ \| '_ \| | '_ \ / _` |    | | '_ \| | __| / __| '_ \     |   | 
- |   |     |  _ <| |_| | | | | | | | | | | | (_| |    | | | | | | |_ _\__ \ | | |    |   | 
- |   |     |_| \_\\__,_|_| |_|_| |_|_|_| |_|\__, |    |_|_| |_|_|\__(_)___/_| |_|    |   | 
- |   |                                      |___/                                    |   | 
- |___|~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~|___| 
-(_____)                                                                             (_____)
+echo ">> Running init.sh script for Ubuntu 24! <<"
 
-EOF
+# Updating APT packages
+echo "Updating APT packages..."
+sudo apt-get update > /dev/null
 
-# Updating pakages
-echo "<<<<<<< UPDATING APT PACKAGES >>>>>>>"
-sudo apt-get update 
-echo
+# Upgrading APT packages
+echo "Upgrading APT packages..."
+sudo apt-get upgrade -y > /dev/null
 
-# Upgrading pakages
-echo "<<<<<<< UPGRADING APT PACKAGES >>>>>>>"
-sudo apt-get upgrade -y
-echo
-
-# Installing packages
-echo "<<<<<<< INSTALLING PACKAGES >>>>>>>"
+# Installing packages.conf packages
 cd $HOME/dotfiles
-if [ ! -f "packages.conf" ]; then
-  echo "Error: packages.conf not found!"
-  exit 1
+if [ -f "packages.conf" ]; then
+  source packages.conf
+  for package in ${packages[@]}; do
+    echo "Installing ${package}..."
+    sudo apt-get install ${package} -y > /dev/null
+  done
 fi
-source packages.conf
-for package in ${packages[@]}; do
-  echo "INSTALLING PACKAGE: ${package}"
-  sudo apt-get install ${package} -y
-  echo
-done
 
+# Installing python venv package
 PYTHON_VERSION=$(python3 -c 'import sys; print(f"{sys.version_info.major}.{sys.version_info.minor}")')
 VENV_PACKAGE="python${PYTHON_VERSION}-venv"
-echo "INSTALLING PACKAGE: ${VENV_PACKAGE}"
-sudo apt-get install -y "$VENV_PACKAGE"
-echo
-
-echo "INSTALLING PACKAGE: alacritty"
-if apt-cache show alacritty | grep -qv "purely virtual"; then
-  sudo apt-get install alacritty -y
-  sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/alacritty 50
-else
-  echo "Alacritty is NOT available in the repositories! Proceeding with manual installation..."
-  source init/alacritty.sh
-  sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/alacritty 50
-  echo "Alacritty installed!"
-fi
-echo
+echo "Installing ${VENV_PACKAGE}..."
+sudo apt-get install -y "$VENV_PACKAGE" > /dev/null
 
 # Downloading nerd-font
-echo "<<<<<<< INSTALLING NERD-FONT >>>>>>>"
+echo "Installing nerdfont..."
 cd $HOME/dotfiles
-source init/nerdfont.sh
-echo "Nerd-font installed!"
-echo
+source init/nerdfont.sh > /dev/null
 
 # Installing node.js
-echo "<<<<<<< INSTALLING NODE.JS >>>>>>>"
-curl -so- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
-\. "$HOME/.nvm/nvm.sh"
-nvm install 22
-echo
+echo "Installing node.js..."
+source init/node.sh > /dev/null
 
 # Installing tmux plugin manager
-echo "<<<<<<< INSTALLING TPM >>>>>>>"
-if [ -d "$HOME/.tmux/plugins/tpm" ]; then
-  echo "Repository '$HOME/.tmux/plugins/tpm' already exists. Skipping clone."
-else
-  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-  echo "TPM installed!"
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  echo "Installing tmux plugin manager..."
+  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm > /dev/null
 fi
-echo
 
 # Installing neovim
-echo "<<<<<<< INSTALLING NEOVIM >>>>>>>"
-source init/neovim.sh
-echo "Neovim installed!"
-echo
+echo "Installing neovim..."
+source init/neovim.sh > /dev/null
 
 # Stowing dotfiles
-echo "<<<<<<< STOWING DOTFILES >>>>>>>"
+echo "Stowing dotfiles..."
 cd $HOME/dotfiles
-stow alacritty tmux nvim
-echo "Dotfiles stowed!"
-echo
+stow alacritty tmux nvim > /dev/null
 
 # Addint tmux auto-start to .bashrc
-echo "<<<<<<< ADDING TMUX AUTO-START COMMAND TO .bashrc >>>>>>>"
-source init/tmux.sh
-echo "TMUX auto-start configured!"
-echo
+echo "Configuring TMUX auto-start..."
+source init/tmux.sh > /dev/null
 
-echo "<<<<<<< INSTALLING UV BY ASTRAL >>>>>>>"
-curl -LsSf https://astral.sh/uv/install.sh | sh
-echo
+echo "Installing uv python package manager..."
+curl -LsSf https://astral.sh/uv/install.sh | sh > /dev/null
 
-echo "<<<<<<< EVERYTHING RUN SUCCESSFULLY >>>>>>>"
+echo ">> init.sh script for Ubuntu 24 completed! Please restart your terminal. <<"
