@@ -15,6 +15,7 @@ exec_always --no-startup-id picom
 exec_always --no-startup-id killall polybar
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
 exec_always feh --bg-scale ~/.config/backgrounds/background.jpg
+exec_always --no-startup-id xinput list | grep -i touchpad && xinput set-prop "$(xinput list | grep -i touchpad | head -1 | sed 's/.*id=\([0-9]*\).*/\1/')" "libinput Tapping Enabled" 1 && xinput set-prop "$(xinput list | grep -i touchpad | head -1 | sed 's/.*id=\([0-9]*\).*/\1/')" "libinput Natural Scrolling Enabled" 1
 
 # Font for window titles. Will also be usess a different font
 # is used in the bar {} block below.
