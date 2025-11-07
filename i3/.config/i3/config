@@ -25,10 +25,6 @@ font pango:JetBrainsMono Nerd Font 12
 # text rendering and scalability on retinathanks to pango).
 #font pango:DejaVu Sans Mono 8
 
-# Gaps
-gaps inner 10
-gaps outer 5
-
 # Start XDG autostart .desktop files using
 # https://wiki.archlinux.org/index.php/XDG
 exec --no-startup-id dex --autostart --env
