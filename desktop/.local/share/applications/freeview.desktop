@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=FreeView
+Exec=/usr/local/freesurfer/8.1.0/bin/freeview
+Icon=application-x-executable
+Categories=Utility;

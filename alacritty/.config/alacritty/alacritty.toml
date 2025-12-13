@@ -3,10 +3,10 @@
 TERM = "xterm-256color"
 
 [window]
-opacity = 0.6
+opacity = 1
 
 [font]
-size = 8.0
+size = 12.0
 
 [font.bold]
 family = "JetBrainsMono Nerd Font"

@@ -5,7 +5,6 @@ return {
       ensure_installed = {
         "stylua",
         "isort",
-        "prettierd",
       },
     })
   end,
