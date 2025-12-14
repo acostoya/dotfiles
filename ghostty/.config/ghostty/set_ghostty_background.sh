@@ -5,8 +5,8 @@ CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/ghostty/config"
 ZRO_DIR="${HOME}/.config/zro-wallpapers/wallpapers"
 FALLBACK="${HOME}/.config/backgrounds/background_blurred.png"
 
-if [ -f "$ZRO_DIR/ZRO_Teams_4_blurred.jpg" ]; then
-    BACKGROUND="$ZRO_DIR/ZRO_Teams_4_blurred.jpg"
+if [ -f "$ZRO_DIR/ZRO_Teams_2_blurred.jpg" ]; then
+    BACKGROUND="$ZRO_DIR/ZRO_Teams_2_blurred.jpg"
 else
     BACKGROUND="$FALLBACK"
 fi

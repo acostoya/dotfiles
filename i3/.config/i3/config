@@ -19,7 +19,7 @@ exec_always --no-startup-id ~/.config/ghostty/set_ghostty_background.sh
 exec_always --no-startup-id picom
 exec_always --no-startup-id killall polybar
 exec_always --no-startup-id ~/.config/polybar/launch_polybar.sh
-exec_always bash -c 'if [ -f ~/.config/zro-wallpapers/wallpapers/ZRO_Teams_4.jpg ]; then feh --bg-scale ~/.config/zro-wallpapers/wallpapers/ZRO_Teams_4.jpg; else feh --bg-scale ~/.config/backgrounds/background.png; fi'
+exec_always bash -c 'if [ -f ~/.config/zro-wallpapers/wallpapers/ZRO_Teams_2.jpg ]; then feh --bg-scale ~/.config/zro-wallpapers/wallpapers/ZRO_Teams_2.jpg; else feh --bg-scale ~/.config/backgrounds/background.png; fi'
 exec_always --no-startup-id ~/.config/ghostty/set_ghostty_background.sh
 exec_always --no-startup-id xinput list | grep -i touchpad && xinput set-prop "$(xinput list | grep -i touchpad | head -1 | sed 's/.*id=\([0-9]*\).*/\1/')" "libinput Tapping Enabled" 1 && xinput set-prop "$(xinput list | grep -i touchpad | head -1 | sed 's/.*id=\([0-9]*\).*/\1/')" "libinput Natural Scrolling Enabled" 1
 
@@ -136,16 +136,16 @@ set $ws9 "9"
 set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+1 workspace number $ws1
-bindsym $mod+2 workspace number $ws2
-bindsym $mod+3 workspace number $ws3
-bindsym $mod+4 workspace number $ws4
-bindsym $mod+5 workspace number $ws5
-bindsym $mod+6 workspace number $ws6
-bindsym $mod+7 workspace number $ws7
-bindsym $mod+8 workspace number $ws8
-bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+1 exec bash ~/.config/i3/switch_workspace.sh 1
+bindsym $mod+2 exec bash ~/.config/i3/switch_workspace.sh 2
+bindsym $mod+3 exec bash ~/.config/i3/switch_workspace.sh 3
+bindsym $mod+4 exec bash ~/.config/i3/switch_workspace.sh 4
+bindsym $mod+5 exec bash ~/.config/i3/switch_workspace.sh 5
+bindsym $mod+6 exec bash ~/.config/i3/switch_workspace.sh 6
+bindsym $mod+7 exec bash ~/.config/i3/switch_workspace.sh 7
+bindsym $mod+8 exec bash ~/.config/i3/switch_workspace.sh 8
+bindsym $mod+9 exec bash ~/.config/i3/switch_workspace.sh 9
+bindsym $mod+0 exec bash ~/.config/i3/switch_workspace.sh 10
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -233,7 +233,6 @@ client.urgent            $peach    $base  $peach   $overlay0  $peach
 client.placeholder       $overlay0 $base  $text    $overlay0  $overlay0
 client.background        $base
 
-# Assign workspaces to monitors (gracefully handles missing outputs)
-# Primary workspace defaults to the primary output if it exists, otherwise uses any available
-workspace $ws1 output primary
+# Include dynamically generated workspace assignments
+include ~/dotfiles/i3/.config/i3/workspace_assignments.conf
 
