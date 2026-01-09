@@ -10,7 +10,7 @@ cd $HOME/dotfiles
 if [ -f "packages.conf" ]; then
   source packages.conf
   echo "Installing all packages..."
-  sudo pacman -Sy ${packages[@]}
+  sudo pacman -Sy ${packages[@]} --noconfirm
   echo "✓ All packages installed successfully."
 fi
 
