@@ -1,0 +1,55 @@
+{
+  "position": "top",
+  "height": 32,
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["cpu", "memory", "temperature", "battery", "pulseaudio", "network"],
+  "hyprland/workspaces": {
+    "format": "{name}"
+  },
+  "hyprland/window": {
+    "format": "{}"
+  },
+  "cpu": {
+    "format": "{icon} {usage}%",
+    "format-icons": "󰍛",
+    "interval": 2
+  },
+  "memory": {
+    "format": "{icon} {percentage}%",
+    "format-icons": "󰒋",
+    "interval": 2
+  },
+  "temperature": {
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": "󰔏",
+    "critical-threshold": 60
+  },
+  "clock": {
+    "format": "{:%A, %Y-%m-%d | %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "󰂀 {capacity}%",
+    "format-warning": "󰂎 {capacity}%",
+    "format-critical": "󰂎 {capacity}%",
+    "format-charging": "󰚥 {capacity}%",
+    "format-plugged": "󰚥 {capacity}%",
+    "tooltip-format": "{time}"
+  },
+  "network": {
+    "format-wifi": "󰖩 {essid}",
+    "format-ethernet": "󰤭 Connected",
+    "format-linked": "{ifname} (No IP)",
+    "format-disconnected": " Disconnected",
+    "tooltip-format-wifi": "Signal Strenght: {signalStrength}%"
+  },
+  "pulseaudio": {
+      "format": "󰕾 {volume}%",
+      "format-muted": "󰖁"
+  }
+}
