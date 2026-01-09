@@ -7,6 +7,12 @@ return {
     require("catppuccin").setup({
       flavour = "macchiato",
       transparent_background = true,
+      custom_highlights = function(colors)
+        return {
+          NormalFloat = { bg = "NONE" },
+          FloatBorder = { bg = "NONE", fg = colors.blue },
+        }
+      end,
     })
     vim.cmd.colorscheme "catppuccin"
   end
