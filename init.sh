@@ -35,6 +35,9 @@ echo "Enabling sddm service..."
 sudo systemctl enable sddm
 echo "✓ sddm service enabled successfully."
 
+# Setting up NVIDIA drivers
+bash $HOME/dotfiles/nvidia-setup.sh
+
 # Final message and prompt for reboot
 echo ">> init.sh script run successfully! Do you want to reboot now? (y/n) <<"
 read -r answer
