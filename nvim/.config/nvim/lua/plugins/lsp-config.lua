@@ -16,55 +16,33 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
+      local lspconfig = require("lspconfig")
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
-      
-      -- lua_ls
-      vim.lsp.config.lua_ls = {
-        cmd = { "lua-language-server" },
-        root_markers = { ".luarc.json", ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua.toml", "selene.toml", "selene.yml", ".git" },
+      lspconfig.lua_ls.setup({
         capabilities = capabilities,
-      }
-      
-      -- pyright
-      vim.lsp.config.pyright = {
-        cmd = { "pyright-langserver", "--stdio" },
-        root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", ".git" },
+      })
+      lspconfig.pyright.setup({
         capabilities = capabilities,
         settings = {
           python = {
             pythonPath = vim.fn.exepath("./.venv/bin/python"),
           },
         },
-      }
-      
-      -- ruff
-      vim.lsp.config.ruff = {
-        cmd = { "ruff", "server" },
-        root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", ".git" },
+      })
+      lspconfig.ruff.setup({
         capabilities = capabilities,
         init_options = {
           settings = {
             lineLength = 79,
           },
         },
-      }
-      
-      -- jsonls
-      vim.lsp.config.jsonls = {
-        cmd = { "vscode-json-language-server", "--stdio" },
-        root_markers = { "package.json", ".git" },
+      })
+      lspconfig.jsonls.setup({
         capabilities = capabilities,
-      }
-      
-      -- yamlls
-      vim.lsp.config.yamlls = {
-        cmd = { "yaml-language-server", "--stdio" },
-        root_markers = { ".git" },
+      })
+      lspconfig.yamlls.setup({
         capabilities = capabilities,
-      }
-      
-      -- Enable LSP servers
-      vim.lsp.enable({ "lua_ls", "pyright", "ruff", "jsonls", "yamlls" })
+      })
     end,
   },
 }

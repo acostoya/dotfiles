@@ -2,12 +2,13 @@ return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   config = function()
-    require("nvim-treesitter").setup()
-    
-    -- Install parsers
-    vim.cmd("TSInstall lua python javascript html")
-    
-    -- Enable treesitter-based highlighting and indentation (now native in nvim 0.11+)
-    vim.treesitter.language.register("python", "python")
+    local configs = require("nvim-treesitter.configs")
+
+    configs.setup({
+      ensure_installed = { "lua", "python", "javascript", "html" },
+      sync_install = false,
+      highlight = { enable = true },
+      indent = { enable = true },
+    })
   end,
 }
