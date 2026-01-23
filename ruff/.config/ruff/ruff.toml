@@ -1,0 +1,11 @@
+line-length = 79
+
+[lint]
+select = ["D", "E", "W"]
+
+[lint.pydocstyle]
+convention = "google"
+
+[lint.pycodestyle]
+max-doc-length = 72
+

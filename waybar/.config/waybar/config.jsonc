@@ -3,7 +3,7 @@
   "height": 32,
   "modules-left": ["hyprland/workspaces", "hyprland/window"],
   "modules-center": ["clock"],
-  "modules-right": ["cpu", "memory", "temperature", "battery", "pulseaudio", "network"],
+  "modules-right": ["cpu", "memory", "temperature", "battery", "pulseaudio", "custom/bluetooth", "network"],
   "hyprland/workspaces": {
     "format": "{name}"
   },
@@ -51,5 +51,11 @@
   "pulseaudio": {
       "format": "󰕾 {volume}%",
       "format-muted": "󰖁"
+  },
+  "custom/bluetooth": {
+    "format": "{}",
+    "exec": "$HOME/.config/waybar/scripts/bluetooth.sh",
+    "exec-on-event": false,
+    "interval": 5
   }
 }

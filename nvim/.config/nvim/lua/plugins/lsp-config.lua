@@ -29,14 +29,14 @@ return {
           },
         },
       })
-      lspconfig.ruff.setup({
-        capabilities = capabilities,
-        init_options = {
-          settings = {
-            lineLength = 79,
-          },
-        },
-      })
+       lspconfig.ruff.setup({
+         capabilities = capabilities,
+         init_options = {
+           settings = {
+             configuration = os.getenv("HOME") .. "/.config/ruff/ruff.toml",
+           },
+         },
+       })
       lspconfig.jsonls.setup({
         capabilities = capabilities,
       })

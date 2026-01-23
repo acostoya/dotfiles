@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Exit immediately if a command exits with a non-zero status
 set -e
 
 echo ">> Running init.sh script [Arch Linux version] <<"
@@ -8,23 +9,41 @@ echo ">> Running init.sh script [Arch Linux version] <<"
 cd $HOME/dotfiles
 if [ -f "packages.conf" ]; then
   source packages.conf
-  for package in ${packages[@]}; do
-    echo "Installing ${package}..."
-    sudo pacman -Sy ${package} > /dev/null
-    echo "✓ ${package} installed successfully."
-  done
-fi
-
-# Installing tmux plugin manager
-if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
-  echo "Installing tmux plugin manager..."
-  git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm > /dev/null
+  echo "Installing all packages..."
+  sudo pacman -Sy ${packages[@]} --noconfirm
+  echo "✓ All packages installed successfully."
 fi
 
 # Stowing dotfiles
 echo "Stowing dotfiles..."
 cd $HOME/dotfiles
-stow hyprland waybar ghostty nvim zellij backgrounds desktop
+stow hyprland waybar ghostty starship nvim zellij backgrounds
+echo "✓ Dotfiles stowed successfully."
 
+# Configuring starship
+echo "Initializing starship in bashrc..."
+if ! grep -q "eval \"\$(starship init bash)\"" ~/.bashrc; then
+  echo 'eval "$(starship init bash)"' >> ~/.bashrc
+fi
+echo "✓ Starship initialized in bashrc."
 
-echo ">> init.sh script run successfully! <<"
+# Setting up SDDM theme
+bash $HOME/dotfiles/sddm-setup.sh catppuccin-mocha-lavender
+
+# Enabling sddm
+echo "Enabling sddm service..."
+sudo systemctl enable sddm
+echo "✓ sddm service enabled successfully."
+
+# Setting up NVIDIA drivers
+bash $HOME/dotfiles/nvidia-setup.sh
+
+# Final message and prompt for reboot
+echo ">> init.sh script run successfully! Do you want to reboot now? (y/n) <<"
+read -r answer
+if [[ $answer == "y" || $answer == "Y" ]]; then
+  echo "Rebooting system..."
+  sudo reboot
+else
+  echo "Reboot canceled. Please reboot manually later."
+fi
