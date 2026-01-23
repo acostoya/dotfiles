@@ -9,24 +9,26 @@
 
 window#waybar {
     background: transparent;
-    background-color: @crust;
+    background-color: transparent;
     color: @overlay0;
     transition-property: background-color;
     transition-duration: 0.1s;
-    border-bottom: 1px solid @overlay1;
+    border-bottom: none;
 }
 
 #window {
     margin: 8px;
-    padding-left: 8;
-    padding-right: 8;
+    padding-left: 8px;
+    padding-right: 8px;
     color: @text;
 }
 
 button {
     box-shadow: inset 0 -3px transparent;
     border: none;
-    border-radius: 0;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 6px 12px;
 }
 
 button:hover {
@@ -40,13 +42,13 @@ button:hover {
 }
 
 #workspaces button.focused {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     color: @rosewater;
     border-top: 2px solid @rosewater;
 }
 
 #workspaces button.active {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.6);
     color: @mauve;
     border-top: 2px solid @mauve;
 }
@@ -69,57 +71,61 @@ button:hover {
 #mode,
 #scratchpad,
 #custom-bluetooth {
-  margin-top: 2px;
-  margin-bottom: 2px;
-  margin-left: 4px;
-  margin-right: 4px;
-  padding-left: 4px;
-  padding-right: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
 }
 
 #clock {
-    color: @maroon;
-    border-bottom: 2px solid @maroon;
+    color: @mauve;
+    border-bottom: none;
 }
 
 #clock.date {
     color: @mauve;
-    border-bottom: 2px solid @mauve;
+    border-bottom: none;
 }
 
 #pulseaudio {
-    color: @blue;
-    border-bottom: 2px solid @blue;
+    color: @mauve;
+    border-bottom: none;
 }
 
 #network {
-    color: @yellow;
-    border-bottom: 2px solid @yellow;
+    color: @mauve;
+    border-bottom: none;
 }
 
 #battery {
-    color: @green;
-    border-bottom: 2px solid @green;
+    color: @mauve;
+    border-bottom: none;
 }
 
 #cpu {
-    color: @lavender;
-    border-bottom: 2px solid @lavender;
+    color: @mauve;
+    border-bottom: none;
 }
 
 #memory {
-    color: @sapphire;
-    border-bottom: 2px solid @sapphire;
+    color: @mauve;
+    border-bottom: none;
 }
 
 #temperature {
-    color: @peach;
-    border-bottom: 2px solid @peach;
+    color: @mauve;
+    border-bottom: none;
 }
 
 #custom-bluetooth {
-    color: @sky;
-    border-bottom: 2px solid @sky;
+    color: @mauve;
+    border-bottom: none;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -133,7 +139,7 @@ button:hover {
 }
 
 #custom-vpn {
-    color: @lavender;
+    color: @mauve;
     border-radius: 15px;
     padding-left: 6px;
     padding-right: 6px;
