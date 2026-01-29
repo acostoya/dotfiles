@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Freeview
+Comment=FreeSurfer visualization tool
+Exec=bash -ic "freeview"
+Icon=application-x-executable
+Terminal=false
+Categories=Science;Medical;
