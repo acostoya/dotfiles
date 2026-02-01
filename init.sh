@@ -27,13 +27,10 @@ if ! grep -q "eval \"\$(starship init bash)\"" ~/.bashrc; then
 fi
 echo "✓ Starship initialized in bashrc."
 
-# Setting up SDDM theme
-bash $HOME/dotfiles/sddm-setup.sh catppuccin-mocha-lavender
-
-# Enabling sddm
-echo "Enabling sddm service..."
-sudo systemctl enable sddm
-echo "✓ sddm service enabled successfully."
+# Enabling gdm
+echo "Enabling gdm service..."
+sudo systemctl enable gdm
+echo "✓ gdm service enabled successfully."
 
 # Setting up NVIDIA drivers
 bash $HOME/dotfiles/nvidia-setup.sh
