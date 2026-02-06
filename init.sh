@@ -32,6 +32,36 @@ if ! grep -q "eval \"\$(starship init bash)\"" ~/.bashrc; then
 fi
 echo "✓ Starship initialized in bashrc."
 
+# Configuring FreeView
+echo "Setting up FreeView wrapper function..."
+if ! grep -q "^freeview()" ~/.bashrc; then
+  cat >> ~/.bashrc << 'EOF'
+
+# FreeView wrapper function
+freeview() {
+  export QT_QPA_PLATFORM=xcb
+  export QT_QPA_PLATFORM_PLUGIN_PATH=/usr/lib/qt/plugins
+  export FREESURFER_HOME=/opt/freesurfer
+  source $FREESURFER_HOME/SetUpFreeSurfer.sh
+  command freeview "$@"
+}
+EOF
+fi
+echo "✓ FreeView wrapper function added to bashrc."
+
+# Configuring Docker
+echo "Configuring Docker post-installation steps..."
+sudo groupadd docker 2>/dev/null || true
+sudo usermod -aG docker $USER
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+if [ -d "$HOME/.docker" ]; then
+  sudo chown "$USER":"$USER" "$HOME/.docker" -R
+  sudo chmod g+rwx "$HOME/.docker" -R
+fi
+echo "✓ Docker configured successfully."
+echo "  Note: Run 'newgrp docker' or restart your session to apply group changes."
+
 # Enabling gdm
 echo "Enabling gdm service..."
 sudo systemctl enable gdm
