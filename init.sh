@@ -62,10 +62,10 @@ fi
 echo "✓ Docker configured successfully."
 echo "  Note: Run 'newgrp docker' or restart your session to apply group changes."
 
-# Enabling gdm
-echo "Enabling gdm service..."
-sudo systemctl enable gdm
-echo "✓ gdm service enabled successfully."
+# Enabling startup services
+echo "Enabling startup service..."
+sudo systemctl enable gdm ufw
+echo "✓ Startup services enabled successfully."
 
 # Setting up NVIDIA drivers
 echo "Do you want to set up NVIDIA drivers? (y/n)"

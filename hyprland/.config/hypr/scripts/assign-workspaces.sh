@@ -47,31 +47,47 @@ if [ -n "$builtin_monitor" ]; then
     echo "Assigned workspace 1 to built-in monitor: $builtin_monitor"
 fi
 
-  # Assign workspaces 2-10 to external monitors
-  if [ ${#external_monitors[@]} -gt 0 ]; then
-      for i in {2..10}; do
-          for external_monitor in "${external_monitors[@]}"; do
-              hyprctl keyword workspace "$i, monitor:$external_monitor, default:true"
-              echo "Assigned workspace $i to external monitor: $external_monitor"
-          done
-      done
-      
-      # Position external monitor above built-in monitor
-      if [ -n "$builtin_monitor" ] && [ ${#external_monitors[@]} -gt 0 ]; then
-          for external_monitor in "${external_monitors[@]}"; do
-              hyprctl keyword monitor "$external_monitor,at:$builtin_monitor,top"
-              echo "Positioned $external_monitor above $builtin_monitor"
-          done
-      fi
-  else
-      # No external monitors, assign all workspaces to built-in
-      if [ -n "$builtin_monitor" ]; then
-          for i in {2..10}; do
-              hyprctl keyword workspace "$i, monitor:$builtin_monitor, default:true"
-              echo "Assigned workspace $i to built-in monitor: $builtin_monitor (no external monitors)"
-          done
-      fi
-  fi
+  # Assign workspaces 2-10 to external monitors using round-robin
+   if [ ${#external_monitors[@]} -gt 0 ]; then
+       # Calculate how many workspaces per monitor
+       total_workspaces=9  # workspaces 2-10
+       num_external=${#external_monitors[@]}
+       
+       # Distribute workspaces across external monitors
+       workspace_counter=2
+       while [ $workspace_counter -le 10 ]; do
+           for external_monitor in "${external_monitors[@]}"; do
+               if [ $workspace_counter -gt 10 ]; then
+                   break
+               fi
+               # Force reassignment by first removing then adding the workspace rule
+               hyprctl keyword workspace "$workspace_counter, monitor:0xFFFFFFFF" 2>/dev/null || true
+               hyprctl keyword workspace "$workspace_counter, monitor:$external_monitor, default:true"
+               # Move the workspace to the external monitor using a more direct approach
+               hyprctl dispatch workspace $workspace_counter
+               hyprctl dispatch movetoworkspacesilent $workspace_counter
+               hyprctl dispatch workspace 1
+               echo "Assigned workspace $workspace_counter to external monitor: $external_monitor"
+               ((workspace_counter++))
+           done
+       done
+        
+        # Position external monitor above built-in monitor
+        if [ -n "$builtin_monitor" ] && [ ${#external_monitors[@]} -gt 0 ]; then
+            for external_monitor in "${external_monitors[@]}"; do
+                hyprctl keyword monitor "$external_monitor,at:$builtin_monitor,top"
+                echo "Positioned $external_monitor above $builtin_monitor"
+            done
+        fi
+   else
+       # No external monitors, assign all workspaces to built-in
+       if [ -n "$builtin_monitor" ]; then
+           for i in {2..10}; do
+               hyprctl keyword workspace "$i, monitor:$builtin_monitor, default:true"
+               echo "Assigned workspace $i to built-in monitor: $builtin_monitor (no external monitors)"
+           done
+       fi
+   fi
 
 # Wait for all assignments to complete
 sleep 0.5
