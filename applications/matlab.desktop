@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=matlab
+Comment=FreeSurfer Visualization GUI
+Exec=bash -ic "matlab"
+Icon=application-x-executable
+Terminal=false
