@@ -1,0 +1,52 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](surface0)\
+$username\
+$hostname\
+[](bg:lavender fg:surface0)\
+$directory\
+[](fg:lavender bg:pink)\
+$git_branch\
+[ ](fg:pink)\
+$line_break$character"""
+
+palette = 'catppuccin_mocha'
+
+[palettes.catppuccin_mocha]
+red      = "#f38ba8"
+pink     = "#f5c2e7"
+lavender = "#b4befe"
+text     = "#cdd6f4"
+surface0 = "#313244"
+base     = "#1e1e2e"
+
+[username]
+show_always = true
+style_user = "bg:surface0 fg:text"
+style_root = "bg:surface0 fg:text"
+format = '[ $user]($style)'
+
+[hostname]
+ssh_only = false
+style = "bg:surface0 fg:text"
+format = '[@$hostname ]($style)'
+
+[directory]
+style = "fg:base bg:lavender"
+format = "[ $path ]($style)"
+truncation_length = 1
+truncation_symbol = "…/"
+
+[git_branch]
+symbol = ""
+style = "bg:pink"
+format = '[[ $symbol $branch ](fg:base bg:pink)]($style)'
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[❯](bold fg:lavender)'
+error_symbol = '[❯](bold fg:lavender)'
