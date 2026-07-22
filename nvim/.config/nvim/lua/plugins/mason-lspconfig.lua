@@ -15,6 +15,8 @@ return {
 			"yamlls",
 			-- JSON
 			"jsonls",
+			-- R
+			"r_language_server",
 		}
 	}
 }

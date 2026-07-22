@@ -30,6 +30,8 @@ return {
 				},
 			},
 		})
+		-- R
+		vim.lsp.config("r_language_server", { capabilities = capabilities })
 		-- YAML
 		vim.lsp.config("yamlls", { capabilities = capabilities })
 		-- JSON
