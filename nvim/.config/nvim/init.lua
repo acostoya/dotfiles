@@ -9,6 +9,8 @@ vim.diagnostic.config({
 	virtual_text = true,
 })
 
+vim.opt.clipboard = "unnamedplus"
+
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "python",
 	callback = function()
