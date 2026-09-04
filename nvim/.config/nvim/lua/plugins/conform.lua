@@ -7,6 +7,7 @@ return {
 			r = { "air" },
 			yaml = { "yamlfmt" },
 			json = { "prettier" },
+			jsonc = { "prettier" },
 		},
 		formatters = {
 			yamlfmt = {
